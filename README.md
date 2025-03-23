@@ -16,7 +16,7 @@ You will deploy the web server on **Google Cloud Run**, use **Google Cloud Ident
 ---
 
 ### YOUR APPLICATION URL HERE!
-
+https://cloudrun-111147801991.us-central1.run.app
 ---
 
 ## Docs
