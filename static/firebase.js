@@ -6,7 +6,9 @@
  *
  * NOTE: YOU ONLY NEED TO MODIFY THE VOTE FUNCTION AT THE BOTTOM OF THIS FILE.
  */
-firebase.initializeApp(config);
+
+firebase.initializeApp(firebaseConfig);
+
 
 // Watch for state change from sign in
 function initApp() {
@@ -116,17 +118,23 @@ async function vote(team) {
     // refresh the token and return a new one.
     try {
       const token = await createIdToken();
-
-      /*
-       * ++++ YOUR CODE HERE ++++
-       */
-      window.alert(`Not implemented yet!`);
-
+      const formData = new URLSearchParams();
+      formData.append('team', team);
+      
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': `Bearer ${token}`
+        },
+        body: formData
+      });
+      
+      if (response.ok) {
+        window.location.reload();
+      }
     } catch (err) {
-      console.log(`Error when submitting vote: ${err}`);
-      window.alert('Something went wrong... Please try again!');
+      console.log(err);
     }
-  } else {
-    window.alert('User not signed in.');
   }
 }
